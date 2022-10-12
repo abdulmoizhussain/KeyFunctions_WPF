@@ -22,7 +22,10 @@ namespace KeyFunctions_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public ObservableCollection<object> asdf;
+        private ObservableCollection<object> list1 = new(new List<object>
+        {
+            new { DateTime = DateTime.Now.ToString() }
+        });
 
         public MainWindow()
         {
@@ -37,16 +40,18 @@ namespace KeyFunctions_WPF
             // https://parallelcodes.com/wpf-datagrid-with-button/
             // successful keywords on google:
             // C# dotnet datagridview obersablecollection
+
+            //DataGrid_ClipHistory.ItemsSource = list1;
+            DataGrid_ClipHistory.ItemsSource = list1 = new ObservableCollection<object>(new List<object>
+            {
+                new { DateTime = DateTime.Now.ToString() },
+                new { DateTime = DateTime.Now.ToString() },
+                new { DateTime = DateTime.Now.ToString() },
+            });
         }
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            // DataGrid_ClipHistory.DataContext // this is the one to be used.
-
-            DataGrid_ClipHistory.Items.Add(new
-            {
-                DateTime = DateTime.Now.ToString()
-            });
         }
 
         private void CheckBox_OnStateChanged(object sender, RoutedEventArgs e)
@@ -54,23 +59,21 @@ namespace KeyFunctions_WPF
             var checkbox = (CheckBox)sender;
             Console.WriteLine($"{checkbox.Name} {checkbox.IsChecked}");
 
-            //DataGrid_ClipHistory.Items = new ItemCollection();
-            DataGrid_ClipHistory.Items.Add(new
+            AddItem();
+        }
+
+        private void AddItem()
+        {
+            list1.Add(new
             {
                 DateTime = DateTime.Now.ToString()
             });
         }
 
-        private void CopyButtonView_OnClick(object sender, RoutedEventArgs e)
+        private void CopyButton_OnClick(object sender, RoutedEventArgs e)
         {
             dynamic dataContext = ((Button)e.Source).DataContext;
-
             Console.WriteLine(dataContext.DateTime);
-        }
-
-        private void aPicture_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine("MouseButtonEventArgs");
         }
     }
 }

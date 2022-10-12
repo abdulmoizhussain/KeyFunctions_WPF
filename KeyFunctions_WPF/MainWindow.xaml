@@ -61,7 +61,8 @@
                             <Button
                                 ToolTip="Copy Image | Copy Text"
                                 ToolTipService.InitialShowDelay="300"
-                                ToolTipService.ShowDuration="1000">
+                                ToolTipService.ShowDuration="1000"
+                                Click="CopyButton_OnClick">
                                 <Image Source="assets/copy.png" Height="22" Width="35" />
                             </Button>
                         </DataTemplate>
